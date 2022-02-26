@@ -1,0 +1,27 @@
+{
+  "name": "pokedex_synvia",
+  "version": "1.0.0",
+  "description": "Pokedex desenvolvida para o desafio de front-end da Synvia",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/SP-Sam/pokedex_synvia.git"
+  },
+  "author": "Samuel Pereira",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SP-Sam/pokedex_synvia/issues"
+  },
+  "homepage": "https://github.com/SP-Sam/pokedex_synvia#readme",
+  "dependencies": {
+    "next": "^12.1.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  }
+}
