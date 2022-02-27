@@ -5,7 +5,6 @@ const getPokemons = async () => {
   return results;
 };
 
-getPokemons().then((pokemons) => console.log(pokemons));
 export {
   getPokemons,
 };
