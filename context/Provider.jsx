@@ -5,6 +5,7 @@ import MyContext from './myContext';
 const Provider = ({ children }) => {
   const [allPokemons, setAllPokemons] = useState([]);
   const [currentPokemons, setCurrentPokemons] = useState([]);
+  const [isFavButtonClicked, setIsFavButtonClicked] = useState(false);
 
   useEffect(() => {
     getPokemons().then(pokemons => {
@@ -19,7 +20,9 @@ const Provider = ({ children }) => {
       {
         allPokemons,
         currentPokemons,
-        setCurrentPokemons
+        setCurrentPokemons,
+        isFavButtonClicked,
+        setIsFavButtonClicked,
       }
     }>
       {children}

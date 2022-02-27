@@ -1,11 +1,20 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import MyContext from '../context/myContext';
 
 
 const PokemonCard = ({ image, name, id, types }) => {
   const [isMouseOver, setIsMouseOver] = useState(false);
   const [isFav, setIsFav] = useState(false);
+
+  useEffect(() => {
+    const favorites = JSON.parse(localStorage.getItem('favoritePokemons'));
+    if (favorites) {
+      const hasFav = favorites.some(fav => fav.name === name);
+      setIsFav(hasFav);
+    }
+  }, []);
 
   const mouseEnter = () => {
     setIsMouseOver(true);
@@ -17,6 +26,40 @@ const PokemonCard = ({ image, name, id, types }) => {
 
   const handleClick = () => {
     setIsFav(!isFav);
+    const favorites = JSON.parse(localStorage.getItem('favoritePokemons'));
+
+    const newFavorite = {
+      sprites: {
+        large: image,
+      },
+      national_number: id,
+      name,
+      type: types,
+    };
+    
+    if (!isFav) {
+      if (!favorites) {
+        localStorage.setItem('favoritePokemons', JSON.stringify([newFavorite]));
+      } else {
+        const newFavorites = [...favorites, newFavorite];
+        favorites.push(newFavorite);
+
+        localStorage.setItem('favoritePokemons', JSON.stringify(newFavorites));
+      }
+    } else {
+      if (favorites.length !== 0) {
+        const newFavorites = favorites
+          .filter(pokemon => Number(pokemon.national_number) !== Number(id));
+
+        localStorage.setItem('favoritePokemons', JSON.stringify(newFavorites));
+        if (favorites.length === 1) {
+          alert('Você removeu o último Pokemon dos favoritos!');
+          window.location.reload();
+        }
+      } else {
+        localStorage.setItem('favoritePokemons', JSON.stringify([]));
+      }
+    }
   }
 
   return (
