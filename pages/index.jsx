@@ -1,14 +1,20 @@
 import { useContext, useEffect, useState } from 'react';
+import MyContext from '../context/myContext';
+
 import FilterForm from '../components/FilterForm';
 import PokemonCard from '../components/PokemonCard';
-import MyContext from '../context/myContext';
+import FilterTypeButton from '../components/FilterTypeButton';
+import pokemonTypes from '../pokemon_types';
 
 const HomePage = () => {
   const { allPokemons, currentPokemons } = useContext(MyContext);
-  
+
   return (
     <div className="flex flex-col w-100 items-center">
       <FilterForm />
+      <div className="flex flex-wrap justify-center w-11/12 mt-4">
+        {pokemonTypes.map(type => <FilterTypeButton key={type} type={type}/>)}
+      </div>
       <main className="grid grid-cols-1 mob-1:grid-cols-2 gap-3 p-4 sm:grid-cols-3 lg:grid-cols-4 max-w-screen-lg">
         {currentPokemons.length !== 0
           ? (

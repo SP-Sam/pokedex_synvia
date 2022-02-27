@@ -1,8 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { faStar } from '@fortawesome/free-regular-svg-icons';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
-import { theme } from '../tailwind.config';
 
 
 const PokemonCard = ({ image, name, id, types }) => {
