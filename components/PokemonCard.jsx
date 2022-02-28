@@ -1,12 +1,13 @@
+import { useContext, useEffect, useState } from 'react';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
-import { useContext, useEffect, useState } from 'react';
 import MyContext from '../context/myContext';
-
 
 const PokemonCard = ({ image, name, id, types }) => {
   const [isMouseOver, setIsMouseOver] = useState(false);
   const [isFav, setIsFav] = useState(false);
+  const { setCurrentPokemons } = useContext(MyContext);
 
   useEffect(() => {
     const favorites = JSON.parse(localStorage.getItem('favoritePokemons'));
@@ -52,9 +53,11 @@ const PokemonCard = ({ image, name, id, types }) => {
           .filter(pokemon => Number(pokemon.national_number) !== Number(id));
 
         localStorage.setItem('favoritePokemons', JSON.stringify(newFavorites));
+
         if (favorites.length === 1) {
+          const allPokemons = JSON.parse(localStorage.getItem('allPokemons'));
           alert('Você removeu o último Pokemon dos favoritos!');
-          window.location.reload();
+          setCurrentPokemons(allPokemons);
         }
       } else {
         localStorage.setItem('favoritePokemons', JSON.stringify([]));

@@ -1,10 +1,11 @@
-import { useContext, useEffect, useState } from "react";
-import MyContext from "../context/myContext";
+import { useContext, useState } from 'react';
+import MyContext from '../context/myContext';
 
 const FilterForm = () => {
   const [filter, setFilter] = useState('');
   const [inputValue, setInputValue] = useState('');
   const [hasNoFilter, setHasNoFilter] = useState(true);
+
   const { setCurrentPokemons } = useContext(MyContext);
 
   const handleSubmit = (event) => {
@@ -16,12 +17,19 @@ const FilterForm = () => {
       const filteredPokemons = allPokemons
         .filter(pokemon => pokemon.name.toLowerCase().includes(inputValue));
 
+      if (filteredPokemons.length === 0) {
+        alert(`Nenhum Pokémon com o nome "${inputValue}" encontrado!`);
+        return setCurrentPokemons(allPokemons);
+      }
       setCurrentPokemons(filteredPokemons);
     }
     if (filter === 'national_number') {
       const filteredPokemon = allPokemons
         .filter(pokemon => Number(pokemon.national_number) === Number(inputValue));
-
+      if (filteredPokemon.length === 0) {
+        alert(`Nenhum Pokémon com o Registro "${inputValue}" encontrado!`);
+        return setCurrentPokemons(allPokemons);
+      }
       setCurrentPokemons(filteredPokemon);
     }
   };
@@ -36,7 +44,7 @@ const FilterForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col w-4/5 mt-4">
+    <form onSubmit={handleSubmit} className="flex flex-col w-4/5 lg:w-[61rem] mt-4">
       <input
         type="text"
         placeholder="Pesquisar"
@@ -44,6 +52,7 @@ const FilterForm = () => {
         onChange={handleInputValue}
         className="p-1.5 rounded-lg border border-purple-1 focus:outline-none focus:ring focus:ring-purple-2 text-purple-0"
       />
+
       <div className="flex flex-col mt-1 sm:flex-row sm:items-center">
         <div className="flex flex-col sm:flex-row">
           <label htmlFor="filter-name" className="mr-3 text-purple-0 hover:cursor-pointer">
@@ -57,6 +66,7 @@ const FilterForm = () => {
             />
             Nome
           </label>
+
           <label htmlFor="filter-id" className="mr-3 text-purple-0 hover:cursor-pointer">
             <input
               type="radio"

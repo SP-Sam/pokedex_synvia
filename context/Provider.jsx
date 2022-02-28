@@ -3,28 +3,26 @@ import { getPokemons } from '../helpers/getPokemons';
 import MyContext from './myContext';
 
 const Provider = ({ children }) => {
-  const [allPokemons, setAllPokemons] = useState([]);
   const [currentPokemons, setCurrentPokemons] = useState([]);
-  const [isFavButtonClicked, setIsFavButtonClicked] = useState(false);
 
   useEffect(() => {
-    getPokemons().then(pokemons => {
-      localStorage.setItem('allPokemons', JSON.stringify(pokemons));
+    const pokemonsOnLocalStorage = JSON.parse(localStorage.getItem('allPokemons'));
 
-      setAllPokemons(pokemons);
-    });
+    if (pokemonsOnLocalStorage) {
+      setCurrentPokemons(pokemonsOnLocalStorage);
+    } else {
+      getPokemons().then(pokemons => {
+        localStorage.setItem('allPokemons', JSON.stringify(pokemons));
+        setCurrentPokemons(pokemons);
+      });
+    }
   }, []);
 
   return (
-    <MyContext.Provider value={
-      {
-        allPokemons,
-        currentPokemons,
-        setCurrentPokemons,
-        isFavButtonClicked,
-        setIsFavButtonClicked,
-      }
-    }>
+    <MyContext.Provider value={{
+      currentPokemons,
+      setCurrentPokemons,
+    }}>
       {children}
     </MyContext.Provider>
   )
