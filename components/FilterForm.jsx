@@ -44,7 +44,7 @@ const FilterForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col w-4/5 lg:w-[61rem] mt-4">
+    <form onSubmit={handleSubmit} className="flex flex-col w-4/5 lg:w-[61rem] mt-6">
       <input
         type="text"
         placeholder="Pesquisar"

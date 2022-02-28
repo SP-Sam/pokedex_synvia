@@ -9,12 +9,14 @@ import PokemonCard from '../components/PokemonCard';
 
 import pokemonTypes from '../pokemon-types';
 import ResetFilterButton from '../components/ResetFilterButton';
+import Header from '../components/Header';
 
 const HomePage = () => {
   const { currentPokemons } = useContext(MyContext);
 
   return (
     <div className="flex flex-col items-center">
+      <Header />
       <FilterForm />
 
       <div className="flex flex-wrap justify-center w-5/6 lg:w-[64rem] mt-4">
