@@ -11,7 +11,7 @@ const PokemonCard = ({ image, name, id, types }) => {
   const { setPokemons } = useContext(MyContext);
 
   useEffect(() => {
-    const favorites = JSON.parse(localStorage.getItem('favoritePokemons'));
+    const favorites = getLocalStorage('favoritePokemons');
 
     if (favorites) {
       const hasFav = favorites.some(fav => fav.name === name);
@@ -55,7 +55,7 @@ const PokemonCard = ({ image, name, id, types }) => {
         setLocalStorage('favoritePokemons', newFavorites);
 
         if (favorites.length === 1) {
-          const allPokemons = JSON.parse(localStorage.getItem('allPokemons'));
+          const allPokemons = getLocalStorage('allPokemons');
           alert('Você removeu o último Pokemon dos favoritos!');
           return setPokemons(allPokemons);
         }

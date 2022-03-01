@@ -1,5 +1,6 @@
 import { useContext, useState } from 'react';
 import MyContext from '../context/myContext';
+import { getLocalStorage } from '../helpers/manageLocalStorage';
 
 const SortForm = () => {
   const [SortType, setSortType] = useState('');
@@ -11,7 +12,7 @@ const SortForm = () => {
   const sortPokemons = (event) => {
     event.preventDefault();
 
-    const allPokemons = JSON.parse(localStorage.getItem('allPokemons'));
+    const allPokemons = getLocalStorage('allPokemons');
 
     if (SortType === 'name') {
       if (order === 'ascendente') {
