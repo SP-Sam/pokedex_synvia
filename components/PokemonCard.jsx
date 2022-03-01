@@ -75,7 +75,8 @@ const PokemonCard = ({ image, name, id, types }) => {
       <img
         src={image}
         alt={`Imagem de ${name}`}
-        className="p-4 rounded-t-xl bg-white"/>
+        className="p-4 rounded-t-xl bg-white"
+      />
 
       <div className="p-2 rounded-b-xl flex flex-col bg-white pb-4">
         <div className="flex flex-col items-center">

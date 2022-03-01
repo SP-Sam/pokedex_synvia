@@ -76,7 +76,7 @@ const FilterForm = () => {
               onChange={handleRadioValue}
               className="mr-1"
             />
-            Registro National
+            Registro Nacional
           </label>
         </div>
 

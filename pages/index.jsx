@@ -10,22 +10,18 @@ import PokemonCard from '../components/PokemonCard';
 import pokemonTypes from '../pokemon-types';
 import ResetFilterButton from '../components/ResetFilterButton';
 import Header from '../components/Header';
-import Head from 'next/head';
 
 const HomePage = () => {
   const { currentPokemons } = useContext(MyContext);
 
   return (
     <div className="flex flex-col items-center">
-      <Head>
-        <title>Pokedex Synvia</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
-      </Head>
       <Header />
       <FilterForm />
 
       <div className="flex flex-wrap justify-center w-5/6 lg:w-[64rem] mt-4">
         {pokemonTypes.map(type => <FilterTypeButton key={type} type={type}/>)}
+
         <FilterFavoritesButton />
         <ResetFilterButton />
       </div>
