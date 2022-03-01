@@ -13,8 +13,16 @@ const Provider = ({ children }) => {
       setPokemons(pokemonsOnLocalStorage);
     } else {
       getPokemons().then(pokemonList => {
-        setLocalStorage('allPokemons', pokemonList);
-        setPokemons(pokemonList);
+        const uniquePokemons = new Map();
+
+        pokemonList.forEach(pokemonObj => {
+          if (!uniquePokemons.has(pokemonObj.national_number)) {
+            uniquePokemons.set(pokemonObj.national_number, pokemonObj);
+          }
+        });
+
+        setLocalStorage('allPokemons', [...uniquePokemons.values()]);
+        setPokemons([...uniquePokemons.values()]);
       });
     }
   }, []);
