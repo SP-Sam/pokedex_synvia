@@ -14,7 +14,7 @@ const ResetFilterButton = () => {
   return (
     <button
       onClick={handleClick}
-      className="w-full sm:w-32 px-1.5 m-1 bg-purple-0 border border-purple-0 text-white rounded-lg hover:bg-white hover:text-purple-0 transition duration-200"
+      className="w-full sm:w-36 px-1.5 m-1 bg-purple-0 border border-purple-0 text-white rounded-lg hover:bg-white hover:text-purple-0 transition duration-200"
     >
       Limpar Filtragem
     </button>
