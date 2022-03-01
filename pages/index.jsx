@@ -1,18 +1,18 @@
 import { useContext } from 'react';
 import MyContext from '../context/myContext';
 
+import Header from '../components/Header';
 import FilterForm from '../components/FilterForm';
 import FilterTypeButton from '../components/FilterTypeButton';
 import FilterFavoritesButton from '../components/FilterFavoritesButton';
+import ResetFilterButton from '../components/ResetFilterButton';
 import SortForm from '../components/SortForm';
 import PokemonCard from '../components/PokemonCard';
 
 import pokemonTypes from '../pokemon-types';
-import ResetFilterButton from '../components/ResetFilterButton';
-import Header from '../components/Header';
 
 const HomePage = () => {
-  const { currentPokemons } = useContext(MyContext);
+  const { pokemons } = useContext(MyContext);
 
   return (
     <div className="flex flex-col items-center">
@@ -29,11 +29,11 @@ const HomePage = () => {
       <SortForm />
 
       <main className="grid grid-cols-1 mob-1:grid-cols-2 gap-3 p-4 sm:grid-cols-3 lg:grid-cols-4 max-w-screen-lg">
-        {currentPokemons.map(({ sprites, name, national_number, type }, i) => {
+        {pokemons.map(({ image, name, national_number, type }, i) => {
           return (
             <PokemonCard
               key={`${national_number}${i}`}
-              image={sprites.large}
+              image={image}
               name={name}
               id={national_number}
               types={type}

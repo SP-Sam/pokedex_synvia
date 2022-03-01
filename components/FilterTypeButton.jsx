@@ -1,14 +1,16 @@
 import { useContext } from 'react';
 import MyContext from '../context/myContext';
+import { getLocalStorage } from '../helpers/manageLocalStorage';
+
 
 const FilterTypeButton = ({ type }) => {
-  const { setCurrentPokemons } = useContext(MyContext);
+  const { setPokemons } = useContext(MyContext);
 
   const handleClick = () => {
-    const allPokemons = JSON.parse(localStorage.getItem('allPokemons'));
+    const allPokemons = getLocalStorage('allPokemons');
     const filteredPokemons = allPokemons.filter(pokemon => pokemon.type.includes(type));
 
-    setCurrentPokemons(filteredPokemons);
+    setPokemons(filteredPokemons);
   };
 
   return (

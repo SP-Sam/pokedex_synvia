@@ -2,17 +2,18 @@ import { useContext, useState } from 'react';
 import MyContext from '../context/myContext';
 
 const SortForm = () => {
-  const [type, setType] = useState('');
+  const [SortType, setSortType] = useState('');
   const [order, setOrder] = useState('ascendente');
   const [hasNoType, setHasNoType] = useState(true);
-  const { setCurrentPokemons } = useContext(MyContext);
+
+  const { setPokemons } = useContext(MyContext);
 
   const sortPokemons = (event) => {
     event.preventDefault();
 
     const allPokemons = JSON.parse(localStorage.getItem('allPokemons'));
 
-    if (type === 'name') {
+    if (SortType === 'name') {
       if (order === 'ascendente') {
         const sortedPokemons = allPokemons.sort((a, b) => {
           if (a.name > b.name) {
@@ -23,7 +24,7 @@ const SortForm = () => {
           }
           return 0;
         });
-        setCurrentPokemons(sortedPokemons);
+        setPokemons(sortedPokemons);
       }
       if (order === 'descendente') {
         const sortedPokemons = allPokemons.sort((a, b) => {
@@ -35,24 +36,26 @@ const SortForm = () => {
           }
           return 0;
         });
-        setCurrentPokemons(sortedPokemons);
+        setPokemons(sortedPokemons);
       }
     }
 
-    if (type === 'id') {
+    if (SortType === 'id') {
       if (order === 'ascendente') {
-        const sortedPokemons = allPokemons.sort((a, b) => a.national_number - b.national_number);
-        setCurrentPokemons(sortedPokemons);
+        const sortedPokemons = allPokemons
+          .sort((a, b) => a.national_number - b.national_number);
+        setPokemons(sortedPokemons);
       }
       if (order === 'descendente') {
-        const sortedPokemons = allPokemons.sort((a, b) => b.national_number - a.national_number);
-        setCurrentPokemons(sortedPokemons);
+        const sortedPokemons = allPokemons
+          .sort((a, b) => b.national_number - a.national_number);
+        setPokemons(sortedPokemons);
       }
     }
   };
   
   const handleSortType = ({ target }) => {
-    setType(target.value);
+    setSortType(target.value);
     setHasNoType(false);
   };
 
@@ -90,13 +93,14 @@ const SortForm = () => {
       </label>
 
       <select
+        data-testid="select"
         onChange={handleOrder}
         className="bg-white p-1.5 rounded-lg border border-purple-1 focus:outline-none focus:ring focus:ring-purple-2 text-purple-0 mt-1 hover:cursor-pointer"
       >
-        <option value="ascendente">
+        <option value="ascendente" data-testid="select-option">
           Ascendente
         </option>
-        <option value="descendente">
+        <option value="descendente" data-testid="select-option">
           Descendente
         </option>
       </select>

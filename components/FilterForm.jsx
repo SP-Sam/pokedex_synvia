@@ -1,36 +1,45 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import MyContext from '../context/myContext';
+import { getLocalStorage } from '../helpers/manageLocalStorage';
 
 const FilterForm = () => {
   const [filter, setFilter] = useState('');
   const [inputValue, setInputValue] = useState('');
   const [hasNoFilter, setHasNoFilter] = useState(true);
 
-  const { setCurrentPokemons } = useContext(MyContext);
+  const { setPokemons } = useContext(MyContext);
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const allPokemons = JSON.parse(localStorage.getItem('allPokemons'));
+    const allPokemons = getLocalStorage('allPokemons');
   
     if (filter === 'name') {
       const filteredPokemons = allPokemons
-        .filter(pokemon => pokemon.name.toLowerCase().includes(inputValue));
+        .filter(pokemon => pokemon.name.toLowerCase().includes(inputValue.toLowerCase()));
 
       if (filteredPokemons.length === 0) {
         alert(`Nenhum Pokémon com o nome "${inputValue}" encontrado!`);
-        return setCurrentPokemons(allPokemons);
+        setInputValue('');
+
+        return setPokemons(allPokemons);
       }
-      setCurrentPokemons(filteredPokemons);
+
+      setPokemons(filteredPokemons);
     }
+
     if (filter === 'national_number') {
       const filteredPokemon = allPokemons
         .filter(pokemon => Number(pokemon.national_number) === Number(inputValue));
+
       if (filteredPokemon.length === 0) {
         alert(`Nenhum Pokémon com o Registro "${inputValue}" encontrado!`);
-        return setCurrentPokemons(allPokemons);
+        setInputValue('');
+
+        return setPokemons(allPokemons);
       }
-      setCurrentPokemons(filteredPokemon);
+
+      setPokemons(filteredPokemon);
     }
   };
 

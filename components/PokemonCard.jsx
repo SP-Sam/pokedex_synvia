@@ -3,14 +3,16 @@ import { useContext, useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import MyContext from '../context/myContext';
+import { getLocalStorage, setLocalStorage } from '../helpers/manageLocalStorage';
 
 const PokemonCard = ({ image, name, id, types }) => {
   const [isMouseOver, setIsMouseOver] = useState(false);
   const [isFav, setIsFav] = useState(false);
-  const { setCurrentPokemons } = useContext(MyContext);
+  const { setPokemons } = useContext(MyContext);
 
   useEffect(() => {
     const favorites = JSON.parse(localStorage.getItem('favoritePokemons'));
+
     if (favorites) {
       const hasFav = favorites.some(fav => fav.name === name);
       setIsFav(hasFav);
@@ -27,12 +29,10 @@ const PokemonCard = ({ image, name, id, types }) => {
 
   const handleClick = () => {
     setIsFav(!isFav);
-    const favorites = JSON.parse(localStorage.getItem('favoritePokemons'));
+    const favorites = getLocalStorage('favoritePokemons');
 
     const newFavorite = {
-      sprites: {
-        large: image,
-      },
+      image,
       national_number: id,
       name,
       type: types,
@@ -40,27 +40,27 @@ const PokemonCard = ({ image, name, id, types }) => {
     
     if (!isFav) {
       if (!favorites) {
-        localStorage.setItem('favoritePokemons', JSON.stringify([newFavorite]));
+        setLocalStorage('favoritePokemons', [newFavorite]);
       } else {
         const newFavorites = [...favorites, newFavorite];
         favorites.push(newFavorite);
 
-        localStorage.setItem('favoritePokemons', JSON.stringify(newFavorites));
+        setLocalStorage('favoritePokemons', newFavorites);
       }
     } else {
       if (favorites.length !== 0) {
         const newFavorites = favorites
           .filter(pokemon => Number(pokemon.national_number) !== Number(id));
 
-        localStorage.setItem('favoritePokemons', JSON.stringify(newFavorites));
+        setLocalStorage('favoritePokemons', newFavorites);
 
         if (favorites.length === 1) {
           const allPokemons = JSON.parse(localStorage.getItem('allPokemons'));
           alert('Você removeu o último Pokemon dos favoritos!');
-          setCurrentPokemons(allPokemons);
+          return setPokemons(allPokemons);
         }
       } else {
-        localStorage.setItem('favoritePokemons', JSON.stringify([]));
+        setLocalStorage('favoritePokemons', []);
       }
     }
   }

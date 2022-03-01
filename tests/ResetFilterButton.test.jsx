@@ -17,9 +17,10 @@ describe('Testa componente "ResetFilterButton"', () => {
     );
   };
 
-  test('O documento deve conter um botão com o texto "Mostrar Todos"', () => {
+  test('O documento deve conter um botão com o texto "Limpar Filtragem"', () => {
     renderComponent();
-    const resetButton = screen.getByRole('button', { name: 'Mostrar Todos' });
+    const resetButton = screen.getByRole('button', { name: 'Limpar Filtragem' });
+
     expect(resetButton).toBeInTheDocument();
   });
 });

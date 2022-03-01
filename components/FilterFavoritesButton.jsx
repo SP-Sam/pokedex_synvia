@@ -1,17 +1,20 @@
 import { useContext } from 'react';
 import MyContext from '../context/myContext';
 
+import { getLocalStorage } from '../helpers/manageLocalStorage';
+
+
 const FilterFavoritesButton = () => {
-  const { setCurrentPokemons } = useContext(MyContext);
+  const { setPokemons } = useContext(MyContext);
 
   const handleClick = () => {
-    const favorites = JSON.parse(localStorage.getItem('favoritePokemons'));
+    const favorites = getLocalStorage('favoritePokemons');
 
     if (!favorites || favorites.length === 0) {
       return alert('Você não tem Pokemons favoritados!');
     }
 
-    setCurrentPokemons(favorites);
+    setPokemons(favorites);
   };
 
   return (

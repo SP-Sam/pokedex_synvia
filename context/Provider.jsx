@@ -1,27 +1,28 @@
 import { useEffect, useState } from 'react';
 import { getPokemons } from '../helpers/getPokemons';
+import { getLocalStorage, setLocalStorage } from '../helpers/manageLocalStorage';
 import MyContext from './myContext';
 
 const Provider = ({ children }) => {
-  const [currentPokemons, setCurrentPokemons] = useState([]);
+  const [pokemons, setPokemons] = useState([]);
 
   useEffect(() => {
-    const pokemonsOnLocalStorage = JSON.parse(localStorage.getItem('allPokemons'));
+    const pokemonsOnLocalStorage = getLocalStorage('allPokemons');
 
     if (pokemonsOnLocalStorage) {
-      setCurrentPokemons(pokemonsOnLocalStorage);
+      setPokemons(pokemonsOnLocalStorage);
     } else {
-      getPokemons().then(pokemons => {
-        localStorage.setItem('allPokemons', JSON.stringify(pokemons));
-        setCurrentPokemons(pokemons);
+      getPokemons().then(pokemonList => {
+        setLocalStorage('allPokemons', pokemonList);
+        setPokemons(pokemonList);
       });
     }
   }, []);
 
   return (
     <MyContext.Provider value={{
-      currentPokemons,
-      setCurrentPokemons,
+      pokemons,
+      setPokemons,
     }}>
       {children}
     </MyContext.Provider>

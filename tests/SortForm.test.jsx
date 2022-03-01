@@ -33,6 +33,19 @@ describe('Testa componente "SortForm"', () => {
     expect(radioId).toBeInTheDocument();
   });
 
+  test('Deve conter um select', () => {
+    const select = screen.getByTestId('select');
+
+    expect(select).toBeInTheDocument();
+  });
+
+  test('O select deve conter as opções corretas', () => {
+    const options = screen.getAllByTestId('select-option');
+
+    expect(options[0].value).toContain('ascendente');
+    expect(options[1].value).toContain('descendente');
+  });
+
   test('Deve ter um botão desabilitado com o texto "Ordenar"', () => {
     const sortButton = screen.getByText('Ordenar');
 
