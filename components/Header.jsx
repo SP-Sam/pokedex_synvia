@@ -13,10 +13,11 @@ const Header = () => {
       >
         <FontAwesomeIcon icon={faLinkedin} className="h-8 hover:text-white"/>
       </a>
+
       <img
-        className="w-40 sm:w-56"
-        src="https://see.fontimg.com/api/renderfont4/xyWR/eyJyIjoiZnMiLCJoIjo4MSwidyI6MTAwMCwiZnMiOjgxLCJmZ2MiOiIjRjlGQUZBIiwiYmdjIjoiI0ZGRkZGRiIsInQiOjF9/U3ludmlhIFBva2VkZXg/pokemon-solid-normal.png"
+        src="https://img.icons8.com/fluency/96/000000/pokeball.png"
         alt="Imagem Synvia Pokedex"
+        className='w-12'
       />
       <a
         href="https://github.com/SP-Sam/pokedex_synvia"
