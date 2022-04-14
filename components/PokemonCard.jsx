@@ -3,7 +3,10 @@ import { useContext, useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import MyContext from '../context/myContext';
-import { getLocalStorage, setLocalStorage } from '../helpers/manageLocalStorage';
+import {
+  getLocalStorage,
+  setLocalStorage,
+} from '../helpers/manageLocalStorage';
 
 const PokemonCard = ({ image, name, id, types }) => {
   const [isMouseOver, setIsMouseOver] = useState(false);
@@ -14,7 +17,7 @@ const PokemonCard = ({ image, name, id, types }) => {
     const favorites = getLocalStorage('favoritePokemons');
 
     if (favorites) {
-      const hasFav = favorites.some(fav => fav.name === name);
+      const hasFav = favorites.some((fav) => fav.name === name);
       setIsFav(hasFav);
     }
   }, []);
@@ -37,7 +40,7 @@ const PokemonCard = ({ image, name, id, types }) => {
       name,
       type: types,
     };
-    
+
     if (!isFav) {
       if (!favorites) {
         setLocalStorage('favoritePokemons', [newFavorite]);
@@ -49,8 +52,9 @@ const PokemonCard = ({ image, name, id, types }) => {
       }
     } else {
       if (favorites.length !== 0) {
-        const newFavorites = favorites
-          .filter(pokemon => Number(pokemon.national_number) !== Number(id));
+        const newFavorites = favorites.filter(
+          (pokemon) => Number(pokemon.national_number) !== Number(id)
+        );
 
         setLocalStorage('favoritePokemons', newFavorites);
 
@@ -63,7 +67,7 @@ const PokemonCard = ({ image, name, id, types }) => {
         setLocalStorage('favoritePokemons', []);
       }
     }
-  }
+  };
 
   return (
     <div
@@ -80,20 +84,19 @@ const PokemonCard = ({ image, name, id, types }) => {
 
       <div className="p-2 rounded-b-xl flex flex-col bg-white pb-4">
         <div className="flex flex-col items-center">
-          <span className="bg-indigo-300 px-2 rounded-xl">
-            #{id}
-          </span>
-          <span className="h-3 mt-2">
-            {isMouseOver || isFav
-              ? <FontAwesomeIcon icon={faStar} className="text-yellow-400"/>
-              : <FontAwesomeIcon icon={faStar} className="text-yellow-400 hidden"/>}
-          </span>
+          <span className="bg-indigo-300 px-2 rounded-xl">#{id}</span>
+          <div className="h-4 mt-2 mb-1 w-full flex justify-center items-center">
+            {isFav || isMouseOver ? (
+              <FontAwesomeIcon
+                icon={faStar}
+                className="text-yellow-400 h-full"
+              />
+            ) : null}
+          </div>
         </div>
-        <h2 className="font-bold text-center my-3">
-          {name}
-        </h2>
+        <h2 className="font-bold text-center mb-3">{name}</h2>
         <div className="flex justify-around">
-          {types.map(type => {
+          {types.map((type) => {
             return (
               <span
                 key={type}
@@ -101,12 +104,12 @@ const PokemonCard = ({ image, name, id, types }) => {
               >
                 {type}
               </span>
-            )
+            );
           })}
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default PokemonCard;
