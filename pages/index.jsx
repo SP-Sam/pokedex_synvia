@@ -20,7 +20,9 @@ const HomePage = () => {
       <FilterForm />
 
       <div className="flex flex-wrap justify-center w-5/6 lg:w-[64rem] mt-4">
-        {pokemonTypes.map(type => <FilterTypeButton key={type} type={type}/>)}
+        {pokemonTypes.map((type) => (
+          <FilterTypeButton key={type} type={type} />
+        ))}
 
         <FilterFavoritesButton />
         <ResetFilterButton />
@@ -38,7 +40,7 @@ const HomePage = () => {
               id={national_number}
               types={type}
             />
-          )
+          );
         })}
       </main>
     </div>
