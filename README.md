@@ -6,7 +6,7 @@ Desafio técnico para vaga de Desenvolvedor Front-end na Synvia.
 
 <img src="https://github.com/SP-Sam/pokedex_synvia/blob/main/images/pokedex_demo.png" alt="Home page 1">
 
-> Synvia Pokedex é uma aplicação web responsiva onde são listados 807 Pokémons e suas informações básicas. Sendo possível filtrar e ordenar estes Pokémons de diversas formas.
+> A Pokedex é uma aplicação web responsiva onde são listados 807 Pokémons e suas informações básicas. Sendo possível filtrar e ordenar estes Pokémons de diversas formas.
 
 ## Tecnologias utilizadas
 * JavaScript
