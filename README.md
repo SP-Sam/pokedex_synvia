@@ -1,8 +1,8 @@
-# Synvia Pokedex
+# Pokedex
 
 Desafio técnico para vaga de Desenvolvedor Front-end na Synvia.
 
-### Clique [Aqui](https://spsam-pokedexsynvia.vercel.app/) para testar a aplicação.
+### Clique [Aqui](https://spsam-pokedex.vercel.app/) para testar a aplicação.
 
 <img src="https://github.com/SP-Sam/pokedex_synvia/blob/main/images/pokedex_demo.png" alt="Home page 1">
 
